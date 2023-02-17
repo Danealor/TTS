@@ -1,0 +1,131 @@
+VO_PCWorgenFemale_AttackMyTarget01|Turn my enemy to shreds!
+VO_PCWorgenFemale_AttackMyTarget02|Unleash your rage!
+VO_PCWorgenFemale_AttackMyTarget03|Assist me!
+VO_PCWorgenFemale_Charge01|For Gilneas!
+VO_PCWorgenFemale_Charge02|Gilneas will rise again!
+VO_PCWorgenFemale_Charge03|For honor and glory!
+VO_PCWorgenFemale_Charge04|Victory is ours!
+VO_PCWorgenFemale_Cheer01|Great!
+VO_PCWorgenFemale_Cheer02|Fantastic!
+VO_PCWorgenFemale_Cheer03|Great job!
+VO_PCWorgenFemale_Congratulations01|Glory onto you.
+VO_PCWorgenFemale_Congratulations02|The day is yours.
+VO_PCWorgenFemale_Congratulations03|Fortune smiles upon you.
+VO_PCWorgenFemale_Err2hEquipped01|I need both hands for my weapon.
+VO_PCWorgenFemale_Err2hSkillNotFound01|I can't wield that yet.
+VO_PCWorgenFemale_Err2hSkillNotFound02|I don't have that ability yet.
+VO_PCWorgenFemale_ErrAbilityCooldown01|That ability isn't ready yet.
+VO_PCWorgenFemale_ErrAbilityCooldown02|I can't do that yet.
+VO_PCWorgenFemale_ErrAbilityCooldown03|Not ready yet.
+VO_PCWorgenFemale_ErrAlreadyInGroup01|They can't join our group.
+VO_PCWorgenFemale_ErrAmmoOnly01|I can't put that there.
+VO_PCWorgenFemale_ErrBagFull01|That bag is full.
+VO_PCWorgenFemale_ErrCantCreateHere01|I can't do that here.
+VO_PCWorgenFemale_ErrCantDropSoulBoundItem01|I can't drop that.
+VO_PCWorgenFemale_ErrCantDropSoulBoundItem02|That's bound to me.
+VO_PCWorgenFemale_ErrCantEquipEver01|I'll never be able to equip that.
+VO_PCWorgenFemale_ErrCantEquipLevel01|I'm not high enough level to use that.
+VO_PCWorgenFemale_ErrCantEquipLevel02|I can't use that yet.
+VO_PCWorgenFemale_ErrCantEquipSkill01|My skill level isn't high enough to equip that.
+VO_PCWorgenFemale_ErrCantLearnSpell01|I can't learn that spell.
+VO_PCWorgenFemale_ErrCantTradeSoulBoundItem01|I can't trade that.
+VO_PCWorgenFemale_ErrCantUseItem01|I can't use that.
+VO_PCWorgenFemale_ErrChestInUse01|I can't loot that right now.
+VO_PCWorgenFemale_ErrGenericNoTarget01|I don't have a target.
+VO_PCWorgenFemale_ErrGenericNoTarget02|I need to target something first.
+VO_PCWorgenFemale_ErrGenericNoTarget03|I need a target.
+VO_PCWorgenFemale_ErrGuildPermissions01|I can't do that.
+VO_PCWorgenFemale_ErrInvalidAttackTarget01|I can't attack that target.
+VO_PCWorgenFemale_ErrInvalidAttackTarget02|I can't attack that!
+VO_PCWorgenFemale_ErrInventoryFull01|Inventory is full.
+VO_PCWorgenFemale_ErrInventoryFull02|I can't carry anymore.
+VO_PCWorgenFemale_ErrItemCooldown01|I can't use that item yet.
+VO_PCWorgenFemale_ErrItemCooldown02|It's not ready yet.
+VO_PCWorgenFemale_ErrItemCooldown03|It's still recharging.
+VO_PCWorgenFemale_ErrItemLocked01|It's locked.
+VO_PCWorgenFemale_ErrItemMaxCount01|I can't carry anymore of those.
+VO_PCWorgenFemale_ErrLootDidntKill01|I can't loot that.
+VO_PCWorgenFemale_ErrLootDidntKill02|That would be stealing!
+VO_PCWorgenFemale_ErrLootTooFar01|I need to get closer.
+VO_PCWorgenFemale_ErrLootTooFar02|Too far away!
+VO_PCWorgenFemale_ErrLootTooFar03|I can't reach that.
+VO_PCWorgenFemale_ErrMustEquipItem01|I'll need to equip that to use it.
+VO_PCWorgenFemale_ErrMustEquipItem02|That's not equipped yet.
+VO_PCWorgenFemale_ErrNoAmmo01|I'm out of ammo.
+VO_PCWorgenFemale_ErrNoEnergy01|Not enough energy.
+VO_PCWorgenFemale_ErrNoEnergy02|I don't have enough energy.
+VO_PCWorgenFemale_ErrNoMana01|Not enough mana.
+VO_PCWorgenFemale_ErrNoMana02|I need more mana.
+VO_PCWorgenFemale_ErrNoMana03|My mana is low.
+VO_PCWorgenFemale_ErrNoRage01|Not enough rage.
+VO_PCWorgenFemale_ErrNoRage02|Need more rage.
+VO_PCWorgenFemale_ErrNotABag01|That's not a bag.
+VO_PCWorgenFemale_ErrNotEnoughMoney01|I don't have enough money.
+VO_PCWorgenFemale_ErrNotEnoughMoney02|I can't afford that.
+VO_PCWorgenFemale_ErrNotEnoughMoney03|It's too expensive.
+VO_PCWorgenFemale_ErrNotEquippable01|I can't equip that.
+VO_PCWorgenFemale_ErrOutOfRange01|It's too far away.
+VO_PCWorgenFemale_ErrOutOfRange02|I'm out of range.
+VO_PCWorgenFemale_ErrOutOfRange03|I need to get closer.
+VO_PCWorgenFemale_ErrPartyFull01|We can't invite anyone else.
+VO_PCWorgenFemale_ErrPotionCooldown01|I can't drink anymore yet.
+VO_PCWorgenFemale_ErrSpellCooldown01|That spell isn't ready yet.
+VO_PCWorgenFemale_ErrSpellCooldown02|I can't cast that yet.
+VO_PCWorgenFemale_ErrSpellCooldown03|That's still recharging.
+VO_PCWorgenFemale_Flee01|We are shamed in this defeat!
+VO_PCWorgenFemale_Flee02|Discretion is the better part of valor. Now flee!
+VO_PCWorgenFemale_Flee03|Run away!
+VO_PCWorgenFemale_Flirt02|I hope you don't mind a little howling in bed.
+VO_PCWorgenFemale_Flirt04|I'm looking for a man who appreciates... natural beauty.
+VO_PCWorgenFemale_Flirt05|I just want someone to pat me on my head and tell me I'm a good girl.
+VO_PCWorgenFemale_Flirt09|You can take me home! I'm housebroken.
+VO_PCWorgenFemale_FollowMe01|Come with me!
+VO_PCWorgenFemale_FollowMe02|Stay close.
+VO_PCWorgenFemale_FollowMe03|Follow me!
+VO_PCWorgenFemale_Goodbye01|Farewell.
+VO_PCWorgenFemale_Goodbye02|May the great wolf spirit guide you.
+VO_PCWorgenFemale_Goodbye03|Never forget. Never surrender.
+VO_PCWorgenFemale_Goodbye04|The scythe is our salvation.
+VO_PCWorgenFemale_HealMe01|Heal me!
+VO_PCWorgenFemale_HealMe02|I require healing!
+VO_PCWorgenFemale_Hello01|Fate has brought you here to me.
+VO_PCWorgenFemale_Hello02|Greetings.
+VO_PCWorgenFemale_Hello03|Our fates are intertwined!
+VO_PCWorgenFemale_Hello04|The beast in me hungers.
+VO_PCWorgenFemale_Help01|I require aid!
+VO_PCWorgenFemale_Help02|Help!
+VO_PCWorgenFemale_IncomingDanger01|Steel yourselves!
+VO_PCWorgenFemale_No01|Never!
+VO_PCWorgenFemale_No02|Denied.
+VO_PCWorgenFemale_No03|No.
+VO_PCWorgenFemale_OpenFire01|Fire!
+VO_PCWorgenFemale_OpenFire02|Release the hounds.
+VO_PCWorgenFemale_OutofMana01|I am low on mana!
+VO_PCWorgenFemale_OutofMana02|My mana has been expended.
+VO_PCWorgenFemale_Silly01|Yes, I've tried shaving! It doesn't work, trust me.
+VO_PCWorgenFemale_Silly02|I don't really know why we do that.
+VO_PCWorgenFemale_Silly03|Pardon.
+VO_PCWorgenFemale_Silly04|At least we don't "sparkle".
+VO_PCWorgenFemale_Silly05|I love Darnassus. Trees, everywhere!
+VO_PCWorgenFemale_Silly07|That's like... is that bacon? Hey guys, I smell - you smell bacon? Bacon? Anyone? That's bacon! Bacon! Who's got the bacon? Where's the bacon!?
+VO_PCWorgenFemale_Silly08|Excuse me, could I just... um... sniff your backside for a sec?
+VO_PCWorgenFemale_Silly09|Something under your cloak smells heavenly.
+VO_PCWorgenFemale_Silly10|I get moody during that time of the month. You know, with the full moon and all.
+VO_PCWorgenFemale_ThankYou01|I am honored.
+VO_PCWorgenFemale_ThankYou02|You have my gratitude.
+VO_PCWorgenFemale_ThankYou03|Thank you.
+VO_PCWorgenFemale_Train01|Chugga chugga chugga chugga choo-choo!
+VO_PCWorgenFemale_WaitHere01|Stay!
+VO_PCWorgenFemale_WaitHere02|Don't move!
+VO_PCWorgenFemale_Yes01|Most assuredly!
+VO_PCWorgenFemale_Yes02|Absolutely!
+VO_PCWorgenFemale_Yes03|That's affirmative.
+VO_PCWorgenFemale_YourWelcome01|Thank me later.
+VO_PCWorgenFemale_YourWelcome02|Don't mention it.
+VO_PCWorgenFemale_YourWelcome03|That's Gilnean hospitality for you.
+VO_WorgenFemale_ForAlliance_01|For the Alliance!
+VO_WorgenFemale_Oops_01|Bit of a blunder there.
+VO_WorgenFemale_Sorry_01|Terribly sorry.
+VO_WorgenFemale_Taunt_01|Bloody coward is what you are!
+VO_WorgenFemale_Threaten_01|You're in for a world of pain!
+VO_WorgenFemale_Whoa_01|I don't believe it.
