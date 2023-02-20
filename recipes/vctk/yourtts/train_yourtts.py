@@ -30,7 +30,7 @@ RUN_NAME = "YourTTS-EN-VCTK"
 OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
 
 # If you want to do transfer learning and speedup your training you can set here the path to the original YourTTS model
-RESTORE_PATH = None  # "/root/.local/share/tts/tts_models--multilingual--multi-dataset--your_tts/model_file.pth"
+RESTORE_PATH = None # r"C:\Users\iambl\AppData\Local\tts\tts_models--multilingual--multi-dataset--your_tts\model_file.pth"
 
 # This paramter is usefull to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
 SKIP_TRAIN_EPOCH = False
@@ -54,14 +54,25 @@ if not os.path.exists(VCTK_DOWNLOAD_PATH):
     print(">>> Downloading VCTK dataset:")
     download_vctk(VCTK_DOWNLOAD_PATH)
     resample_files(VCTK_DOWNLOAD_PATH, SAMPLE_RATE, file_ext="flac", n_jobs=NUM_RESAMPLE_THREADS)
+    
+WORGEN_PATH = os.path.join(CURRENT_PATH, "Worgen")
 
 # init configs
 vctk_config = BaseDatasetConfig(
     formatter="vctk", dataset_name="vctk", meta_file_train="", meta_file_val="", path=VCTK_DOWNLOAD_PATH, language="en"
 )
 
+worgen_config = BaseDatasetConfig(
+    formatter="ljspeech",
+    dataset_name="worgen",
+    meta_file_train="metadata.txt",
+    meta_file_val="",
+    path=WORGEN_PATH,
+    language="en",
+)
+
 # Add here all datasets configs, in our case we just want to train with the VCTK dataset then we need to add just VCTK. Note: If you want to added new datasets just added they here and it will automatically compute the speaker embeddings (d-vectors) for this new dataset :)
-DATASETS_CONFIG_LIST = [vctk_config]
+DATASETS_CONFIG_LIST = [vctk_config, worgen_config]
 
 ### Extract speaker embeddings
 SPEAKER_ENCODER_CHECKPOINT_PATH = (
@@ -128,7 +139,7 @@ config = VitsConfig(
     run_name=RUN_NAME,
     project_name="YourTTS",
     run_description="""
-            - Original YourTTS trained using VCTK dataset
+            - Original VCTK YourTTS fine-tuned on Worgen dataset
         """,
     dashboard_logger="tensorboard",
     logger_uri=None,
