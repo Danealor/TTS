@@ -9,7 +9,7 @@ __pycache__/
 *$py.class
 
 # Training data
-notebooks/tts_train_dir/
+**/tts_train_dir/
 
 # C extensions
 *.so
