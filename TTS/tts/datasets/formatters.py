@@ -390,7 +390,7 @@ def vctk(root_path, meta_files=None, wavs_path="wav48_silence_trimmed", mic="mic
         with open(meta_file, "r", encoding="utf-8") as file_text:
             text = file_text.readlines()[0]
         # p280 has no mic2 recordings
-        if speaker_id == "p280":
+        if speaker_id  == "p280":
             wav_file = os.path.join(root_path, wavs_path, speaker_id, file_id + f"_mic1.{file_ext}")
         else:
             wav_file = os.path.join(root_path, wavs_path, speaker_id, file_id + f"_{mic}.{file_ext}")
