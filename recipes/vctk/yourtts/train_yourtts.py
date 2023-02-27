@@ -31,10 +31,10 @@ def main():
     OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
 
     # If you want to do transfer learning and speedup your training you can set here the path to the original YourTTS model
-    # RESTORE_PATH = r"C:\Users\iambl\AppData\Local\tts\tts_models--multilingual--multi-dataset--your_tts\model_file.pth"
+    RESTORE_PATH = r"C:\Users\iambl\AppData\Local\tts\tts_models--multilingual--multi-dataset--your_tts\model_file.pth"
 
     # Or, to continue previous run
-    RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-February-26-2023_12+33AM-708d1451\checkpoint_90000.pth"
+    # RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-February-26-2023_12+33AM-708d1451\checkpoint_90000.pth"
 
     # This paramter is usefull to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
     SKIP_TRAIN_EPOCH = False
@@ -48,7 +48,7 @@ def main():
     SAMPLE_RATE = 16000
 
     # Max audio length in seconds to be used in training (every audio bigger than it will be ignored)
-    MAX_AUDIO_LEN_IN_SECONDS = 10
+    MAX_AUDIO_LEN_IN_SECONDS = 11
 
     ### Download VCTK dataset
     VCTK_DOWNLOAD_PATH = os.path.join(CURRENT_PATH, "VCTK")
@@ -215,6 +215,12 @@ def main():
             [
                 "Prior to November 22, 1963.",
                 "VCTK_p305",
+                None,
+                "en",
+            ],
+            [
+                "It's only fun if they run.",
+                "ljspeech",
                 None,
                 "en",
             ],
