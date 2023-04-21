@@ -127,11 +127,11 @@ def main():
         use_d_vector_file=True,
         d_vector_dim=512,
         num_layers_text_encoder=10,
+        speaker_encoder_model_path=SPEAKER_ENCODER_CHECKPOINT_PATH,
+        speaker_encoder_config_path=SPEAKER_ENCODER_CONFIG_PATH,
         resblock_type_decoder="2",  # On the paper, we accidentally trained the YourTTS using ResNet blocks type 2, if you like you can use the ResNet blocks type 1 like the VITS model
         # Usefull parameters to enable the Speaker Consistency Loss (SCL) discribed in the paper
         # use_speaker_encoder_as_loss=True,
-        # speaker_encoder_model_path=SPEAKER_ENCODER_CHECKPOINT_PATH,
-        # speaker_encoder_config_path=SPEAKER_ENCODER_CONFIG_PATH,
         # Usefull parameters to the enable multilingual training
         # use_language_embedding=True,
         # embedded_language_dim=4,
@@ -229,7 +229,8 @@ def main():
         use_weighted_sampler=True,
         # Ensures that all speakers are seen in the training batch equally no matter how many samples each speaker has
         weighted_sampler_attrs={"speaker_name": 1.0},
-        # It defines the Speaker Consistency Loss (SCL) α to 9 like the paper
+        weighted_sampler_multipliers={},
+    # It defines the Speaker Consistency Loss (SCL) α to 9 like the paper
         speaker_encoder_loss_alpha=9.0,
     )
 
