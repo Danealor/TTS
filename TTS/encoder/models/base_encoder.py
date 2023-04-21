@@ -19,7 +19,10 @@ class PreEmphasis(nn.Module):
         assert len(x.size()) == 2
 
         x = torch.nn.functional.pad(x.unsqueeze(1), (1, 0), "reflect")
-        return torch.nn.functional.conv1d(x, self.filter).squeeze(1)
+        try:
+            return torch.nn.functional.conv1d(x, self.filter).squeeze(1)
+        except:
+            return torch.nn.functional.conv1d(x.cpu(), self.filter).squeeze(1)
 
 
 class BaseEncoder(nn.Module):

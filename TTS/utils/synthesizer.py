@@ -224,6 +224,7 @@ class Synthesizer(object):
                         speaker_name, num_samples=None, randomize=False
                     )
                     speaker_embedding = np.array(speaker_embedding)[None, :]  # [1 x embedding_dim]
+                    print(speaker_embedding)
                 else:
                     # get speaker idx from the speaker name
                     speaker_id = self.tts_model.speaker_manager.name_to_id[speaker_name]
