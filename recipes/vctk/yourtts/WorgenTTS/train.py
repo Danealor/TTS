@@ -36,7 +36,7 @@ def main():
 
     # Set here the batch size to be used in training and evaluation
     #BATCH_SIZE = 32
-    BATCH_SIZE = 8 # My poor 8GB GPU can't handle a batch size of 32!
+    BATCH_SIZE = 12 # My poor 12GB GPU can't handle a batch size of 32!
     
     # init configs
     config = load_config(config_file)
@@ -47,7 +47,7 @@ def main():
     
     # load data
     train_samples, eval_samples = load_tts_samples(
-        config.datasets,
+        [dataset for dataset in config.datasets if dataset.formatter != "dummy"],
         eval_split=True,
         eval_split_max_size=config.eval_split_max_size,
         eval_split_size=config.eval_split_size,

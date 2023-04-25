@@ -214,7 +214,7 @@ class Synthesizer(object):
         if self.tts_speakers_file or hasattr(self.tts_model.speaker_manager, "name_to_id"):
 
             # handle Neon models with single speaker.
-            if len(self.tts_model.speaker_manager.name_to_id) == 1:
+            if len(self.tts_model.speaker_manager.name_to_id) == 1 and False:
                 speaker_id = list(self.tts_model.speaker_manager.name_to_id.values())[0]
 
             elif speaker_name and isinstance(speaker_name, str):
@@ -224,7 +224,6 @@ class Synthesizer(object):
                         speaker_name, num_samples=None, randomize=False
                     )
                     speaker_embedding = np.array(speaker_embedding)[None, :]  # [1 x embedding_dim]
-                    print(speaker_embedding)
                 else:
                     # get speaker idx from the speaker name
                     speaker_id = self.tts_model.speaker_manager.name_to_id[speaker_name]

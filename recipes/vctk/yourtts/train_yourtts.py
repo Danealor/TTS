@@ -25,23 +25,25 @@ def main():
     CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
     # Name of the run for the Trainer
-    RUN_NAME = "YourTTS-EN-VCTK"
+    RUN_NAME = "Worgen-only"
 
     # Path where you want to save the models outputs (configs, checkpoints and tensorboard logs)
     OUT_PATH = os.path.dirname(os.path.abspath(__file__))  # "/raid/coqui/Checkpoints/original-YourTTS/"
 
     # If you want to do transfer learning and speedup your training you can set here the path to the original YourTTS model
     RESTORE_PATH = r"C:\Users\iambl\AppData\Local\tts\tts_models--multilingual--multi-dataset--your_tts\model_file.pth"
+    CONFIG_SE_PATH = os.path.join(os.path.dirname(RESTORE_PATH), "config_se.json")
+    MODEL_SE_PATH = os.path.join(os.path.dirname(RESTORE_PATH), "model_se.pth")
 
     # Or, to continue previous run
-    # RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-February-26-2023_12+33AM-708d1451\checkpoint_90000.pth"
+    #RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-April-23-2023_11+03PM-3fa2634a\checkpoint_35000.pth"
 
     # This paramter is usefull to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
     SKIP_TRAIN_EPOCH = False
 
     # Set here the batch size to be used in training and evaluation
     #BATCH_SIZE = 32
-    BATCH_SIZE = 8 # My poor 8GB GPU can't handle a batch size of 32!
+    BATCH_SIZE = 8 # My poor 12GB GPU can't handle a batch size of 32!
 
     # Training Sampling rate and the target sampling rate for resampling the downloaded dataset (Note: If you change this you might need to redownload the dataset !!)
     # Note: If you add new datasets, please make sure that the dataset sampling rate and this parameter are matching, otherwise resample your audios
@@ -68,7 +70,7 @@ def main():
     )
 
     worgen_config = BaseDatasetConfig(
-        formatter="ljspeech",
+        formatter="multi_ljspeech",
         dataset_name="worgen",
         meta_file_train="metadata.txt",
         meta_file_val="",
@@ -77,7 +79,8 @@ def main():
     )
 
     # Add here all datasets configs, in our case we just want to train with the VCTK dataset then we need to add just VCTK. Note: If you want to added new datasets just added they here and it will automatically compute the speaker embeddings (d-vectors) for this new dataset :)
-    DATASETS_CONFIG_LIST = [vctk_config, worgen_config]
+    #DATASETS_CONFIG_LIST = [vctk_config, worgen_config]
+    DATASETS_CONFIG_LIST = [worgen_config]
 
     ### Extract speaker embeddings
     SPEAKER_ENCODER_CHECKPOINT_PATH = (
@@ -135,6 +138,93 @@ def main():
         # Usefull parameters to the enable multilingual training
         # use_language_embedding=True,
         # embedded_language_dim=4,
+        freeze_DP=True,
+        freeze_PE=True,
+        freeze_flow_decoder=True,
+        # Use same args as pretrained model
+        num_chars=165,
+        out_channels=513,
+        spec_segment_size=62,
+        hidden_channels=192,
+        hidden_channels_ffn_text_encoder=768,
+        num_heads_text_encoder=2,
+        kernel_size_text_encoder=3,
+        dropout_p_text_encoder=0.1,
+        dropout_p_duration_predictor=0.5,
+        kernel_size_posterior_encoder=5,
+        dilation_rate_posterior_encoder=1,
+        num_layers_posterior_encoder=16,
+        kernel_size_flow=5,
+        dilation_rate_flow=1,
+        num_layers_flow=4,
+        resblock_kernel_sizes_decoder=[
+            3,
+            7,
+            11
+        ],
+        resblock_dilation_sizes_decoder=[
+            [
+                1,
+                3,
+                5
+            ],
+            [
+                1,
+                3,
+                5
+            ],
+            [
+                1,
+                3,
+                5
+            ]
+        ],
+        upsample_rates_decoder=[
+            8,
+            8,
+            2,
+            2
+        ],
+        upsample_initial_channel_decoder=512,
+        upsample_kernel_sizes_decoder=[
+            16,
+            16,
+            4,
+            4
+        ],
+        periods_multi_period_discriminator=[
+            2,
+            3,
+            5,
+            7,
+            11
+        ],
+        use_sdp=True,
+        noise_scale=1.0,
+        inference_noise_scale=0.3,
+        length_scale=1.5,
+        noise_scale_dp=0.6,
+        inference_noise_scale_dp=0.3,
+        max_inference_len=None,
+        init_discriminator=True,
+        use_spectral_norm_disriminator=False,
+        use_speaker_embedding=False,
+        num_speakers=1244,
+        speakers_file=None,
+        speaker_embedding_channels=512,
+        detach_dp_input=True,
+        use_language_embedding=True,
+        embedded_language_dim=4,
+        num_languages=3,
+        language_ids_file=None,
+        use_speaker_encoder_as_loss=True,
+        speaker_encoder_config_path=CONFIG_SE_PATH,
+        speaker_encoder_model_path=MODEL_SE_PATH,
+        condition_dp_on_speaker=True,
+        encoder_sample_rate=None,
+        interpolate_z=True,
+        reinit_DP=False,
+        reinit_text_encoder=False
     )
 
     # General training config, here you can change the batch size and others usefull parameters
@@ -153,12 +243,13 @@ def main():
         batch_group_size=48,
         eval_batch_size=BATCH_SIZE,
         num_loader_workers=8,
+        eval_split_size=0.05,
         eval_split_max_size=256,
         print_step=50,
         plot_step=100,
         log_model_step=1000,
         save_step=5000,
-        save_n_checkpoints=2,
+        save_n_checkpoints=3,
         save_checkpoints=True,
         target_loss="loss_1",
         print_eval=False,
@@ -188,42 +279,60 @@ def main():
         max_audio_len=SAMPLE_RATE * MAX_AUDIO_LEN_IN_SECONDS,
         mixed_precision=False,
         test_sentences=[
+            # [
+            #     "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
+            #     "VCTK_p277",
+            #     None,
+            #     "en",
+            # ],
+            # [
+            #     "Be a voice, not an echo.",
+            #     "VCTK_p239",
+            #     None,
+            #     "en",
+            # ],
+            # [
+            #     "I'm sorry Dave. I'm afraid I can't do that.",
+            #     "VCTK_p258",
+            #     None,
+            #     "en",
+            # ],
+            # [
+            #     "This cake is great. It's so delicious and moist.",
+            #     "VCTK_p244",
+            #     None,
+            #     "en",
+            # ],
+            # [
+            #     "Prior to November 22, 1963.",
+            #     "VCTK_p305",
+            #     None,
+            #     "en",
+            # ],
             [
                 "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-                "VCTK_p277",
+                "female-worgen",
                 None,
-                "en",
+                "en"
             ],
             [
-                "Be a voice, not an echo.",
-                "VCTK_p239",
+                "It's only fun when they run!",
+                "female-worgen",
                 None,
-                "en",
+                "en"
             ],
             [
-                "I'm sorry Dave. I'm afraid I can't do that.",
-                "VCTK_p258",
+                "I am kinder than Miss Alina, though her voice is prettier.",
+                "female-worgen",
                 None,
-                "en",
+                "en"
             ],
             [
-                "This cake is great. It's so delicious and moist.",
-                "VCTK_p244",
+                "I need to move, to do something, anything, even if just jogging in place!",
+                "female-worgen",
                 None,
-                "en",
-            ],
-            [
-                "Prior to November 22, 1963.",
-                "VCTK_p305",
-                None,
-                "en",
-            ],
-            [
-                "It's only fun if they run.",
-                "ljspeech",
-                None,
-                "en",
-            ],
+                "en"
+            ]
         ],
         # Enable the weighted sampler
         use_weighted_sampler=True,
@@ -240,9 +349,17 @@ def main():
         eval_split_max_size=config.eval_split_max_size,
         eval_split_size=config.eval_split_size,
     )
+    
+    # Add fake language sources to keep language embedder the same size
+    config.datasets += [
+        BaseDatasetConfig(language='pt-br'),
+        BaseDatasetConfig(language='fr-fr')
+    ]
 
     # Init the model
     model = Vits.init_from_config(config)
+
+    print(list(model.speaker_manager.embeddings.keys()))
 
     # Init the trainer and 🚀
     trainer = Trainer(
