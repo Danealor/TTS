@@ -1,0 +1,1 @@
+C:\Users\iambl\GitHub\TTS\venv\Scripts\python.exe C:\Users\iambl\GitHub\TTS\notebooks\synthesizer.py --model_path=C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\Worgen-only-April-25-2023_02+46PM-fe54b6db\checkpoint_100000.pth --speaker_embeddings_file=C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\Worgen\speakers.pth

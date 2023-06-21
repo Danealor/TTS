@@ -36,7 +36,7 @@ def main():
     MODEL_SE_PATH = os.path.join(os.path.dirname(RESTORE_PATH), "model_se.pth")
 
     # Or, to continue previous run
-    #RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-April-23-2023_11+03PM-3fa2634a\checkpoint_35000.pth"
+    RESTORE_PATH = r"C:\Users\iambl\GitHub\TTS\recipes\vctk\yourtts\YourTTS-EN-VCTK-April-24-2023_03+23PM-3fa2634a\checkpoint_65000.pth"
 
     # This paramter is usefull to debug, it skips the training epochs and just do the evaluation  and produce the test sentences
     SKIP_TRAIN_EPOCH = False
@@ -79,8 +79,8 @@ def main():
     )
 
     # Add here all datasets configs, in our case we just want to train with the VCTK dataset then we need to add just VCTK. Note: If you want to added new datasets just added they here and it will automatically compute the speaker embeddings (d-vectors) for this new dataset :)
-    #DATASETS_CONFIG_LIST = [vctk_config, worgen_config]
-    DATASETS_CONFIG_LIST = [worgen_config]
+    DATASETS_CONFIG_LIST = [vctk_config, worgen_config]
+    #DATASETS_CONFIG_LIST = [worgen_config]
 
     ### Extract speaker embeddings
     SPEAKER_ENCODER_CHECKPOINT_PATH = (
@@ -138,9 +138,9 @@ def main():
         # Usefull parameters to the enable multilingual training
         # use_language_embedding=True,
         # embedded_language_dim=4,
-        freeze_DP=True,
-        freeze_PE=True,
-        freeze_flow_decoder=True,
+        # freeze_DP=True,
+        # freeze_PE=True,
+        # freeze_flow_decoder=True,
         # Use same args as pretrained model
         num_chars=165,
         out_channels=513,
@@ -279,36 +279,36 @@ def main():
         max_audio_len=SAMPLE_RATE * MAX_AUDIO_LEN_IN_SECONDS,
         mixed_precision=False,
         test_sentences=[
-            # [
-            #     "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            #     "VCTK_p277",
-            #     None,
-            #     "en",
-            # ],
-            # [
-            #     "Be a voice, not an echo.",
-            #     "VCTK_p239",
-            #     None,
-            #     "en",
-            # ],
-            # [
-            #     "I'm sorry Dave. I'm afraid I can't do that.",
-            #     "VCTK_p258",
-            #     None,
-            #     "en",
-            # ],
-            # [
-            #     "This cake is great. It's so delicious and moist.",
-            #     "VCTK_p244",
-            #     None,
-            #     "en",
-            # ],
-            # [
-            #     "Prior to November 22, 1963.",
-            #     "VCTK_p305",
-            #     None,
-            #     "en",
-            # ],
+            [
+                "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
+                "VCTK_p277",
+                None,
+                "en",
+            ],
+            [
+                "Be a voice, not an echo.",
+                "VCTK_p239",
+                None,
+                "en",
+            ],
+            [
+                "I'm sorry Dave. I'm afraid I can't do that.",
+                "VCTK_p258",
+                None,
+                "en",
+            ],
+            [
+                "This cake is great. It's so delicious and moist.",
+                "VCTK_p244",
+                None,
+                "en",
+            ],
+            [
+                "Prior to November 22, 1963.",
+                "VCTK_p305",
+                None,
+                "en",
+            ],
             [
                 "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
                 "female-worgen",

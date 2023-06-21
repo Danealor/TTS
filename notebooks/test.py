@@ -1,7 +1,17 @@
-import keyboard
+import pyaudio
 
-input()
-while True:
-    event = keyboard.read_event()
-    if event.event_type == 'up' and event.name == 'enter':
-        break
+p = pyaudio.PyAudio()
+info = p.get_host_api_info_by_index(0)
+numdevices = info.get('deviceCount')
+
+for i in range(0, numdevices):
+    if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+        print("Input Device id ", i, " - ", p.get_device_info_by_host_api_device_index(0, i).get('name'))
+    elif (p.get_device_info_by_host_api_device_index(0, i).get('maxOutputChannels')) > 0:
+        print("Output Device id ", i, " - ", p.get_device_info_by_host_api_device_index(0, i).get('name'))
+
+numapi = p.get_host_api_count()
+for i in range(0, numapi):
+    info = p.get_host_api_info_by_index(i)
+    numdevices = info.get('deviceCount')
+    print(f"{i}. {numdevices} devices found")

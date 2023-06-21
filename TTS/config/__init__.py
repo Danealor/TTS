@@ -89,6 +89,7 @@ def load_config(config_path: str) -> Coqpit:
             data = read_json_with_comments(config_path)
     else:
         raise TypeError(f" [!] Unknown config file type {ext}")
+    print(data)
     config_dict.update(data)
     model_name = _process_model_name(config_dict)
     config_class = register_config(model_name.lower())

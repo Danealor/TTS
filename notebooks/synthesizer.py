@@ -73,6 +73,53 @@ def prompt_speaker(speakers):
 
     return selected_speaker
 
+def prompt_device(devices, devtype):
+    print(f"Found the following {devtype} audio devices:")
+
+    # Print the options with right-justified numbers
+    maxkey = max(devices.keys())
+    for i, device in devices.items():
+        print(f"{i:>{len(str(maxkey))}}. {device}")
+
+    # Prompt the user to enter an option
+    while True:
+        user_input = input("Enter the device ID (press Enter for default): ")
+        if user_input.isdigit():  # User entered a number
+            device_id = int(user_input)
+            if device_id in devices:
+                selected_device_name = devices[device_id]
+                selected_device_id = device_id
+                break
+        elif not user_input:
+            selected_device_name = "[Default]"
+            selected_device_id = None
+            break
+        print("Invalid device option, please try again.")
+
+    print(f"You selected: {selected_device_name}")
+
+    return selected_device_id
+
+def get_devices():
+    info = p.get_host_api_info_by_index(0)
+    numdevices = info.get('deviceCount')
+    inp = {}
+    outp = {}
+
+    for i in range(0, numdevices):
+        if (p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+            inp[i] = p.get_device_info_by_host_api_device_index(0, i).get('name')
+        elif (p.get_device_info_by_host_api_device_index(0, i).get('maxOutputChannels')) > 0:
+            outp[i] = p.get_device_info_by_host_api_device_index(0, i).get('name')
+
+    return inp, outp
+
+def prompt_input_output():
+    global input_device_id, output_device_id
+    inp, outp = get_devices()
+    input_device_id = prompt_device(inp, "input")
+    output_device_id = prompt_device(outp, "output")
+
 def get_synthesizer(config):
     os.chdir(config['model_base_path'])
     tts_config = load_config(config['config_path'])
@@ -110,13 +157,14 @@ p = pyaudio.PyAudio()
 
 # Define a function to construct the audio stream
 def play_audio(sample_rate):
-    global audio_stream, byte_rate, is_recording
+    global audio_stream, byte_rate, is_recording, output_device_id
     is_recording = False
     byte_rate = sample_rate * p.get_sample_size(pyaudio.paFloat32)
     audio_stream = p.open(format=pyaudio.paFloat32,
                     channels=1,
                     rate=sample_rate,
                     output=True,
+                    output_device_index=output_device_id,
                     stream_callback=audio_playback_callback)
     resume_audio()
     
@@ -148,7 +196,7 @@ def stop_audio():
 
 # Define a function to construct the audio stream
 def record_audio(sample_rate):
-    global audio_stream, audio_data, byte_rate, is_recording
+    global audio_stream, audio_data, byte_rate, is_recording, input_device_id
     is_recording = True
     audio_data = b''
     byte_rate = sample_rate * p.get_sample_size(pyaudio.paInt16)
@@ -156,6 +204,7 @@ def record_audio(sample_rate):
                     channels=1,
                     rate=sample_rate,
                     input=True,
+                    input_device_index=input_device_id,
                     stream_callback=audio_recording_callback)
 
 # Checks if there's data in the audio pipeline, either paused or playing
@@ -215,6 +264,9 @@ def main():
     print("TTS synthesizer initialized.")
     speakers = list(synthesizer.tts_model.speaker_manager.name_to_id.keys())
     speaker = prompt_speaker(speakers)
+
+    # Setup audio input/output
+    prompt_input_output()
 
     # Get permissions for recording audio
     record_audio(synthesizer.tts_model.config.audio.sample_rate)
